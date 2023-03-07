@@ -1,0 +1,34 @@
+image: gitpod/workspace-java-11
+
+tasks:
+  - before: |
+      ./install_flink.sh
+      export PATH="$PATH:/workspace/learn-building-flink-applications-in-java-exercises/flink-1.17.0/bin"
+      start-cluster.sh
+      taskmanager.sh start
+      taskmanager.sh start
+      taskmanager.sh start
+      exit
+  - command: gp preview http://localhost:8081 && exit
+  - name: Data Generator
+    command: |
+      export PATH="$PATH:/workspace/learn-building-flink-applications-in-java-exercises/flink-1.17.0/bin"
+      cd exercises
+  - name: Flight Importer
+    command: |
+      export PATH="$PATH:/workspace/learn-building-flink-applications-in-java-exercises/flink-1.17.0/bin"
+      cd exercises
+  - name: User Statistics
+    command: |
+      export PATH="$PATH:/workspace/learn-building-flink-applications-in-java-exercises/flink-1.17.0/bin"
+      cd exercises
+  - name: Misc
+    command: |
+      export PATH="$PATH:/workspace/learn-building-flink-applications-in-java-exercises/flink-1.17.0/bin"
+      cd exercises
+
+ports:
+  - port: 8081
+    onOpen: ignore
+
+workspaceLocation: /workspace/learn-building-flink-applications-in-java-exercises
