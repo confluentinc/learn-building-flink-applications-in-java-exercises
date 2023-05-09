@@ -1,6 +1,5 @@
 package flightimporter;
 
-import datagen.DataGeneratorJob;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.connector.kafka.source.KafkaSource;
@@ -22,14 +21,14 @@ public class FlightImporterJob {
         }
 
         KafkaSource<String> skyOneSource = KafkaSource.<String>builder()
-                .setProperties(consumerConfig)
-                .setTopics("skyone")
-                .setStartingOffsets(OffsetsInitializer.latest())
-                .setValueOnlyDeserializer(new SimpleStringSchema())
-                .build();
+            .setProperties(consumerConfig)
+            .setTopics("skyone")
+            .setStartingOffsets(OffsetsInitializer.latest())
+            .setValueOnlyDeserializer(new SimpleStringSchema())
+            .build();
 
         DataStream<String> skyOneStream = env
-                .fromSource(skyOneSource, WatermarkStrategy.noWatermarks(), "skyone_source");
+            .fromSource(skyOneSource, WatermarkStrategy.noWatermarks(), "skyone_source");
 
         skyOneStream.print();
 
