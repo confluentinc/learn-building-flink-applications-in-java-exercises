@@ -1,12 +1,10 @@
 package models;
 
-import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.annotation.JsonCreator;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.time.ZonedDateTime;
 import java.util.Objects;
-
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SkyOneAirlinesFlightData {
@@ -20,8 +18,8 @@ public class SkyOneAirlinesFlightData {
     private String flightNumber;
     private String confirmation;
 
-    @JsonCreator
     public SkyOneAirlinesFlightData() {
+
     }
 
     public String getEmailAddress() {
@@ -96,13 +94,13 @@ public class SkyOneAirlinesFlightData {
     @Override
     public String toString() {
         return "SkyOneAirlinesFlightData{" +
-                "emailAddress='" + emailAddress + '\'' +
-                ", flightDepartureTime=" + flightDepartureTime +
-                ", iataDepartureCode='" + iataDepartureCode + '\'' +
-                ", flightArrivalTime=" + flightArrivalTime +
-                ", iataArrivalCode='" + iataArrivalCode + '\'' +
-                ", flightNumber='" + flightNumber + '\'' +
-                ", confirmation='" + confirmation + '\'' +
-                '}';
+            "emailAddress='" + emailAddress + '\'' +
+            ", flightDepartureTime=" + flightDepartureTime +
+            ", iataDepartureCode='" + iataDepartureCode + '\'' +
+            ", flightArrivalTime=" + flightArrivalTime +
+            ", iataArrivalCode='" + iataArrivalCode + '\'' +
+            ", flightNumber='" + flightNumber + '\'' +
+            ", confirmation='" + confirmation + '\'' +
+            '}';
     }
 }
