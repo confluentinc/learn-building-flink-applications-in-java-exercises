@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.Currency;
+import java.util.Objects;
 import java.util.UUID;
 
 public class SunsetAirFlightData {
@@ -105,5 +106,34 @@ public class SunsetAirFlightData {
 
     public void setAircraftDetails(String aircraftDetails) {
         this.aircraftDetails = aircraftDetails;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SunsetAirFlightData that = (SunsetAirFlightData) o;
+        return Objects.equals(customerEmailAddress, that.customerEmailAddress) && Objects.equals(departureTime, that.departureTime) && Objects.equals(departureAirport, that.departureAirport) && Objects.equals(arrivalTime, that.arrivalTime) && Objects.equals(arrivalAirport, that.arrivalAirport) && Objects.equals(flightDuration, that.flightDuration) && Objects.equals(flightId, that.flightId) && Objects.equals(referenceNumber, that.referenceNumber) && Objects.equals(totalPrice, that.totalPrice) && Objects.equals(aircraftDetails, that.aircraftDetails);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(customerEmailAddress, departureTime, departureAirport, arrivalTime, arrivalAirport, flightDuration, flightId, referenceNumber, totalPrice, aircraftDetails);
+    }
+
+    @Override
+    public String toString() {
+        return "SunsetAirFlightData{" +
+            "customerEmailAddress='" + customerEmailAddress + '\'' +
+            ", departureTime=" + departureTime +
+            ", departureAirport='" + departureAirport + '\'' +
+            ", arrivalTime=" + arrivalTime +
+            ", arrivalAirport='" + arrivalAirport + '\'' +
+            ", flightDuration=" + flightDuration +
+            ", flightId='" + flightId + '\'' +
+            ", referenceNumber='" + referenceNumber + '\'' +
+            ", totalPrice=" + totalPrice +
+            ", aircraftDetails='" + aircraftDetails + '\'' +
+            '}';
     }
 }

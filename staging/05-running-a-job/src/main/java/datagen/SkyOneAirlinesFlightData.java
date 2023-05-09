@@ -5,6 +5,7 @@ import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.annotation.JsonFor
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.ZonedDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 public class SkyOneAirlinesFlightData {
@@ -102,5 +103,34 @@ public class SkyOneAirlinesFlightData {
 
     public void setBookingAgencyEmail(String bookingAgencyEmail) {
         this.bookingAgencyEmail = bookingAgencyEmail;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SkyOneAirlinesFlightData that = (SkyOneAirlinesFlightData) o;
+        return Float.compare(that.ticketPrice, ticketPrice) == 0 && Objects.equals(emailAddress, that.emailAddress) && Objects.equals(flightDepartureTime, that.flightDepartureTime) && Objects.equals(iataDepartureCode, that.iataDepartureCode) && Objects.equals(flightArrivalTime, that.flightArrivalTime) && Objects.equals(iataArrivalCode, that.iataArrivalCode) && Objects.equals(flightNumber, that.flightNumber) && Objects.equals(confirmation, that.confirmation) && Objects.equals(aircraft, that.aircraft) && Objects.equals(bookingAgencyEmail, that.bookingAgencyEmail);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(emailAddress, flightDepartureTime, iataDepartureCode, flightArrivalTime, iataArrivalCode, flightNumber, confirmation, ticketPrice, aircraft, bookingAgencyEmail);
+    }
+
+    @Override
+    public String toString() {
+        return "SkyOneAirlinesFlightData{" +
+            "emailAddress='" + emailAddress + '\'' +
+            ", flightDepartureTime=" + flightDepartureTime +
+            ", iataDepartureCode='" + iataDepartureCode + '\'' +
+            ", flightArrivalTime=" + flightArrivalTime +
+            ", iataArrivalCode='" + iataArrivalCode + '\'' +
+            ", flightNumber='" + flightNumber + '\'' +
+            ", confirmation='" + confirmation + '\'' +
+            ", ticketPrice=" + ticketPrice +
+            ", aircraft='" + aircraft + '\'' +
+            ", bookingAgencyEmail='" + bookingAgencyEmail + '\'' +
+            '}';
     }
 }
