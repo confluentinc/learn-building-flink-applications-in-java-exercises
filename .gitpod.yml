@@ -31,4 +31,8 @@ ports:
   - port: 8081
     onOpen: ignore
 
+vscode:
+  extensions:
+    - vscjava.vscode-java-pack
+
 workspaceLocation: /workspace/learn-building-flink-applications-in-java-exercises
