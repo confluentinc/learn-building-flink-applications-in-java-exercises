@@ -32,6 +32,10 @@ The `build.sh` script can be used to validate the code across all exercises and 
 
 This will stage and then solve each exercise before running the tests for that exercise. It will then move on to the next.
 
+### install_flink.sh
+
+This script is used by the `.gitpod.yml` to install Flink. However, if you are setting up a local environment, you may want to refer to this script (or even execute it) to get your own Flink installation ready.
+
 ### cheatsheet.md
 
 A cheatsheet containing code snippets from the course lectures can be found in:
