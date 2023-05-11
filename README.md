@@ -62,7 +62,7 @@ You can automatically solve an exercise by running:
 
 **Note:** Solving an exercise will overwrite your code.
 
-You can solve just single file by running:
+You can solve a single file by running:
 
 ```bash
 ./exercise.sh solve <exercise number> <file name>
