@@ -13,3 +13,5 @@
 * Enhanced the [README.md](README.md)
 * Added the [cheatsheet.md](cheatsheet.md)
 * Added the `build.sh`
+* Updated the `.gitignore`
+* Added a pull request template for Github.
