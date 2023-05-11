@@ -14,7 +14,7 @@ This repository is for the **Building Flink Applications in Java** course provid
 
 ## Gitpod
 
-A Gitpod configuration is available for these exercises. You can use this to construct a pre-configured environment suitable for working on the exercises:
+A [Gitpod](https://gitpod.io/) configuration is available for these exercises. You can use this to construct a pre-configured environment suitable for working on the exercises:
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/confluentinc/learn-building-flink-applications-in-java-exercises)
 
