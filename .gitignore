@@ -23,3 +23,14 @@
 # Java
 target
 
+# Properties files (may contain user credentials)
+consumer.properties
+producer.properties
+
+# Exercises folder
+exercises/*
+!exercises/exercise.sh
+!exercises/exercise.bat
+
+/flink*
+
