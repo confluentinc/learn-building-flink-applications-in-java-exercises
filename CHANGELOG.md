@@ -15,3 +15,7 @@
 * Added the `build.sh`
 * Updated the `.gitignore`
 * Added a pull request template for Github.
+
+## Version 2.0
+
+* Implemented Exercise 18 - Aggregating Flink Data using Windowing.
