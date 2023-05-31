@@ -19,3 +19,7 @@
 ## Version 1.1.1
 
 * Upgrade to Flink 1.17.1
+
+## Version 2.0
+
+* Implemented Exercise 16 - Merging Streams.
