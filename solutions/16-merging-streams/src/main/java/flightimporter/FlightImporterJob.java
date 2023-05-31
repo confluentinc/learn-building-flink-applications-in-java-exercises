@@ -42,17 +42,17 @@ public class FlightImporterJob {
             .build();
 
         KafkaSource<SunsetAirFlightData> sunsetSource = KafkaSource.<SkyOneAirlinesFlightData>builder()
-                .setProperties(consumerConfig)
-                .setTopics("sunset")
-                .setStartingOffsets(OffsetsInitializer.latest())
-                .setValueOnlyDeserializer(new JsonDeserializationSchema(SunsetAirFlightData.class))
-                .build();
+            .setProperties(consumerConfig)
+            .setTopics("sunset")
+            .setStartingOffsets(OffsetsInitializer.latest())
+            .setValueOnlyDeserializer(new JsonDeserializationSchema(SunsetAirFlightData.class))
+            .build();
 
         DataStream<SkyOneAirlinesFlightData> skyOneStream = env
             .fromSource(skyOneSource, WatermarkStrategy.noWatermarks(), "skyone_source");
 
         DataStream<SunsetAirFlightData> sunsetStream = env
-                .fromSource(sunsetSource, WatermarkStrategy.noWatermarks(), "sunset_source");
+            .fromSource(sunsetSource, WatermarkStrategy.noWatermarks(), "sunset_source");
 
         KafkaRecordSerializationSchema<FlightData> flightSerializer = KafkaRecordSerializationSchema.<FlightData>builder()
             .setTopic("flightdata")
@@ -82,8 +82,8 @@ public class FlightImporterJob {
             .map(flight -> flight.toFlightData());
 
         DataStream<FlightData> sunsetFlightStream = sunsetSource
-                .filter(flight -> flight.getArrivalTime().isAfter(ZonedDateTime.now()))
-                .map(flight -> flight.toFlightData());
+            .filter(flight -> flight.getArrivalTime().isAfter(ZonedDateTime.now()))
+            .map(flight -> flight.toFlightData());
 
         return skyOneFlightStream.union(sunsetFlightStream);
     }
