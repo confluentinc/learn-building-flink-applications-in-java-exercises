@@ -24,3 +24,4 @@
 
 * Implemented Exercise 16 - Merging Streams.
 * Implemented Exercise 18 - Aggregating Flink Data using Windowing.
+* Implemented Exercise 20 - Managing State in Flink.
