@@ -19,3 +19,4 @@
 ## Version 2.0
 
 * Implemented Exercise 16 - Merging Streams.
+* Implemented Exercise 18 - Aggregating Flink Data using Windowing.
