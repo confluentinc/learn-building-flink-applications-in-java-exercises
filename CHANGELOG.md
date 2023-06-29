@@ -15,3 +15,7 @@
 * Added the `build.sh`
 * Updated the `.gitignore`
 * Added a pull request template for Github.
+
+## Version 1.1.1
+
+* Upgrade to Flink 1.17.1
