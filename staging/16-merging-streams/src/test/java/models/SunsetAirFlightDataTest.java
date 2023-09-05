@@ -1,11 +1,15 @@
 package models;
 
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.Test;
 
 import static org.apache.flink.types.PojoTestUtils.assertSerializedAsPojo;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SunsetAirFlightDataTest {
+
+    ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
     @Test
     void theClass_shouldBeSerializableAsAPOJO() {
@@ -61,19 +65,38 @@ class SunsetAirFlightDataTest {
 
     @Test
     public void toFlightData_shouldConvertToAFlightDataObject() {
-        SunsetAirFlightData skyOne = new TestHelpers.SunsetBuilder().build();
+        SunsetAirFlightData sunset = new TestHelpers.SunsetBuilder().build();
         FlightData expected = new FlightData();
-        expected.setEmailAddress(skyOne.getCustomerEmailAddress());
-        expected.setDepartureTime(skyOne.getDepartureTime());
-        expected.setDepartureAirportCode(skyOne.getDepartureAirport());
-        expected.setArrivalTime(skyOne.getArrivalTime());
-        expected.setArrivalAirportCode(skyOne.getArrivalAirport());
-        expected.setFlightNumber(skyOne.getFlightId());
-        expected.setConfirmationCode(skyOne.getReferenceNumber());
+        expected.setEmailAddress(sunset.getCustomerEmailAddress());
+        expected.setDepartureTime(sunset.getDepartureTime());
+        expected.setDepartureAirportCode(sunset.getDepartureAirport());
+        expected.setArrivalTime(sunset.getArrivalTime());
+        expected.setArrivalAirportCode(sunset.getArrivalAirport());
+        expected.setFlightNumber(sunset.getFlightId());
+        expected.setConfirmationCode(sunset.getReferenceNumber());
 
-        FlightData actual = skyOne.toFlightData();
+        FlightData actual = sunset.toFlightData();
 
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void serializer_shouldSerializeAndDeserializeTheCorrectObject() throws Exception {
+        SunsetAirFlightData original = new TestHelpers.SunsetBuilder().build();
+
+        String serialized = mapper.writeValueAsString(original);
+        SunsetAirFlightData deserialized = mapper.readValue(serialized, SunsetAirFlightData.class);
+
+        assertSerializedAsPojo(SunsetAirFlightData.class);
+        assertEquals(original, deserialized);
+    }
+
+    @Test
+    public void serializer_shouldHandleUnknownFields() throws Exception {
+        String json = "{\"emailAddress\":\"LJNZGYPIER@email.com\",\"flightDepartureTime\":\"2023-10-16T22:25:00.000Z\",\"iataDepartureCode\":\"LAS\",\"flightArrivalTime\":\"2023-10-17T09:38:00.000Z\",\"iataArrivalCode\":\"BOS\",\"flightNumber\":\"SKY1522\",\"confirmation\":\"SKY1OUJUUK\",\"unknownField\":\"ignore\"}";
+
+        SunsetAirFlightData object = mapper.readValue(json, SunsetAirFlightData.class);
+
+        assertInstanceOf(SunsetAirFlightData.class, object);
+    }
 }
