@@ -1,11 +1,15 @@
 package models;
 
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.Test;
 
 import static org.apache.flink.types.PojoTestUtils.assertSerializedAsPojo;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SkyOneAirlinesFlightDataTest {
+
+    ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
     @Test
     void theClass_shouldBeSerializableAsAPOJO() {
@@ -65,16 +69,36 @@ class SkyOneAirlinesFlightDataTest {
         SkyOneAirlinesFlightData flightData = new TestHelpers.SkyOneBuilder().build();
 
         String expected = "SkyOneAirlinesFlightData{" +
-                "emailAddress='" + flightData.getEmailAddress() + '\'' +
-                ", flightDepartureTime=" + flightData.getFlightDepartureTime() +
-                ", iataDepartureCode='" + flightData.getIataDepartureCode() + '\'' +
-                ", flightArrivalTime=" + flightData.getFlightArrivalTime() +
-                ", iataArrivalCode='" + flightData.getIataArrivalCode() + '\'' +
-                ", flightNumber='" + flightData.getFlightNumber() + '\'' +
-                ", confirmation='" + flightData.getConfirmation() + '\'' +
-                '}';
+            "emailAddress='" + flightData.getEmailAddress() + '\'' +
+            ", flightDepartureTime=" + flightData.getFlightDepartureTime() +
+            ", iataDepartureCode='" + flightData.getIataDepartureCode() + '\'' +
+            ", flightArrivalTime=" + flightData.getFlightArrivalTime() +
+            ", iataArrivalCode='" + flightData.getIataArrivalCode() + '\'' +
+            ", flightNumber='" + flightData.getFlightNumber() + '\'' +
+            ", confirmation='" + flightData.getConfirmation() + '\'' +
+            '}';
 
         assertEquals(expected, flightData.toString());
 
+    }
+
+    @Test
+    public void serializer_shouldSerializeAndDeserializeTheCorrectObject() throws Exception {
+        SkyOneAirlinesFlightData original = new TestHelpers.SkyOneBuilder().build();
+
+        String serialized = mapper.writeValueAsString(original);
+        SkyOneAirlinesFlightData deserialized = mapper.readValue(serialized, SkyOneAirlinesFlightData.class);
+
+        assertSerializedAsPojo(SkyOneAirlinesFlightData.class);
+        assertEquals(original, deserialized);
+    }
+
+    @Test
+    public void serializer_shouldHandleUnknownFields() throws Exception {
+        String json = "{\"emailAddress\":\"LJNZGYPIER@email.com\",\"flightDepartureTime\":\"2023-10-16T22:25:00.000Z\",\"iataDepartureCode\":\"LAS\",\"flightArrivalTime\":\"2023-10-17T09:38:00.000Z\",\"iataArrivalCode\":\"BOS\",\"flightNumber\":\"SKY1522\",\"confirmation\":\"SKY1OUJUUK\",\"unknownField\":\"ignore\"}";
+
+        SkyOneAirlinesFlightData object = mapper.readValue(json, SkyOneAirlinesFlightData.class);
+
+        assertInstanceOf(SkyOneAirlinesFlightData.class, object);
     }
 }

@@ -25,3 +25,7 @@
 * Implemented Exercise 16 - Merging Streams.
 * Implemented Exercise 18 - Aggregating Flink Data using Windowing.
 * Implemented Exercise 20 - Managing State in Flink.
+
+## Version 2.0.1
+
+* Added additional tests to verify the serialization/deserialization of the models, including one for testing the use of the JsonIgnoreProperties annotation.
