@@ -41,7 +41,7 @@ public class FlightImporterJob {
             .setValueOnlyDeserializer(new JsonDeserializationSchema(SkyOneAirlinesFlightData.class))
             .build();
 
-        KafkaSource<SunsetAirFlightData> sunsetSource = KafkaSource.<SkyOneAirlinesFlightData>builder()
+        KafkaSource<SunsetAirFlightData> sunsetSource = KafkaSource.<SunsetAirFlightData>builder()
             .setProperties(consumerConfig)
             .setTopics("sunset")
             .setStartingOffsets(OffsetsInitializer.latest())
