@@ -10,22 +10,16 @@
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
+        <version>3.13.0</version>
         <configuration>
           <source>${target.java.version}</source>
           <target>${target.java.version}</target>
+          <release>${target.java.version}</release>
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.22.2</version>
-        <dependencies>
-          <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-surefire-provider</artifactId>
-            <version>1.2.0</version>
-          </dependency>
-        </dependencies>
+        <version>3.5.2</version>
         <configuration>
           <additionalClasspathElements>
             <additionalClasspathElement>src/test/java/</additionalClasspathElement>
@@ -34,7 +28,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>3.6.0</version>
         <executions>
           <execution>
             <phase>package</phase>
@@ -60,6 +54,11 @@
                   </excludes>
                 </filter>
               </filters>
+              <transformers>
+                <transformer>
+                  <mainClass>datagen.DataGeneratorJob</mainClass>
+                </transformer>
+              </transformers>
             </configuration>
           </execution>
         </executions>
@@ -76,134 +75,57 @@
       <name>Apache Development Snapshot Repository</name>
       <url>https://repository.apache.org/content/repositories/snapshots/</url>
     </repository>
+    <repository>
+      <releases />
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>apache.releases</id>
+      <name>Apache Release Repository</name>
+      <url>https://repository.apache.org/content/repositories/releases/</url>
+    </repository>
   </repositories>
   <dependencies>
     <dependency>
       <groupId>org.apache.flink</groupId>
-      <artifactId>flink-java</artifactId>
-      <version>1.17.0</version>
-      <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>flink-core</artifactId>
-          <groupId>org.apache.flink</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>commons-lang3</artifactId>
-          <groupId>org.apache.commons</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>commons-math3</artifactId>
-          <groupId>org.apache.commons</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>chill-java</artifactId>
-          <groupId>com.twitter</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jsr305</artifactId>
-          <groupId>com.google.code.findbugs</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.flink</groupId>
       <artifactId>flink-streaming-java</artifactId>
-      <version>1.17.0</version>
+      <version>2.1.1</version>
       <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>flink-file-sink-common</artifactId>
-          <groupId>org.apache.flink</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>flink-runtime</artifactId>
-          <groupId>org.apache.flink</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>flink-shaded-guava</artifactId>
-          <groupId>org.apache.flink</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>flink-core</artifactId>
-          <groupId>org.apache.flink</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>commons-math3</artifactId>
-          <groupId>org.apache.commons</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jsr305</artifactId>
-          <groupId>com.google.code.findbugs</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.flink</groupId>
       <artifactId>flink-clients</artifactId>
-      <version>1.17.0</version>
+      <version>2.1.1</version>
       <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>flink-optimizer</artifactId>
-          <groupId>org.apache.flink</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>commons-cli</artifactId>
-          <groupId>commons-cli</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>flink-runtime</artifactId>
-          <groupId>org.apache.flink</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>flink-core</artifactId>
-          <groupId>org.apache.flink</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jsr305</artifactId>
-          <groupId>com.google.code.findbugs</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.flink</groupId>
       <artifactId>flink-json</artifactId>
-      <version>1.17.0</version>
+      <version>2.1.1</version>
       <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>flink-shaded-force-shading</artifactId>
-          <groupId>org.apache.flink</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jsr305</artifactId>
-          <groupId>com.google.code.findbugs</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-slf4j-impl</artifactId>
-      <version>2.17.1</version>
+      <version>2.24.3</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-api</artifactId>
-      <version>2.17.1</version>
+      <version>2.24.3</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
-      <version>2.17.1</version>
+      <version>2.24.3</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.9.2</version>
+      <version>5.11.4</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -223,7 +145,7 @@
     <dependency>
       <groupId>org.junit.platform</groupId>
       <artifactId>junit-platform-runner</artifactId>
-      <version>1.9.2</version>
+      <version>1.11.4</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -251,7 +173,7 @@
     <dependency>
       <groupId>org.apache.flink</groupId>
       <artifactId>flink-test-utils</artifactId>
-      <version>1.17.0</version>
+      <version>2.1.1</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -283,12 +205,24 @@
           <groupId>org.assertj</groupId>
         </exclusion>
         <exclusion>
+          <artifactId>flink-streaming-java</artifactId>
+          <groupId>org.apache.flink</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>flink-statebackend-rocksdb</artifactId>
+          <groupId>org.apache.flink</groupId>
+        </exclusion>
+        <exclusion>
           <artifactId>flink-statebackend-changelog</artifactId>
           <groupId>org.apache.flink</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>jsr305</artifactId>
-          <groupId>com.google.code.findbugs</groupId>
+          <artifactId>flink-dstl-dfs</artifactId>
+          <groupId>org.apache.flink</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>curator-test</artifactId>
+          <groupId>org.apache.curator</groupId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -298,11 +232,10 @@
     <maven.compiler.target>${target.java.version}</maven.compiler.target>
     <maven.compiler.source>${target.java.version}</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <log4j.version>2.17.1</log4j.version>
-    <jackson.version>2.14.0</jackson.version>
-    <target.java.version>11</target.java.version>
-    <flink.version>1.17.0</flink.version>
-    <kafka.version>3.2.2</kafka.version>
+    <log4j.version>2.24.3</log4j.version>
+    <jackson.version>2.18.2</jackson.version>
+    <target.java.version>21</target.java.version>
+    <flink.version>2.1.1</flink.version>
+    <kafka.version>3.9.0</kafka.version>
   </properties>
 </project>
-

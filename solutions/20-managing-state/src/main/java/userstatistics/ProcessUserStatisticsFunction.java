@@ -1,8 +1,8 @@
 package userstatistics;
 
+import org.apache.flink.api.common.functions.OpenContext;
 import org.apache.flink.api.common.state.ValueState;
 import org.apache.flink.api.common.state.ValueStateDescriptor;
-import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
@@ -12,9 +12,9 @@ class ProcessUserStatisticsFunction extends ProcessWindowFunction<UserStatistics
     private ValueStateDescriptor<UserStatistics> stateDescriptor;
 
     @Override
-    public void open(Configuration parameters) throws Exception {
+    public void open(OpenContext openContext) throws Exception {
         stateDescriptor = new ValueStateDescriptor<>("User Statistics", UserStatistics.class);
-        super.open(parameters);
+        super.open(openContext);
     }
 
     @Override

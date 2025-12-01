@@ -52,7 +52,7 @@ $ flink run --fromSavepoint $SAVEPOINT_FILE $JAR_FILE
 ```java
 env.setRestartStrategy(RestartStrategies.fixedDelayRestart(
         3, // number of restart attempts
-        Time.of(10, TimeUnit.SECONDS) // delay
+        Duration.ofSeconds(10) // delay
 ));
 ```
 
