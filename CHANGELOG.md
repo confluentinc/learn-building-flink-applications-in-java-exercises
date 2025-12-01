@@ -36,11 +36,11 @@
 
 ## Version 3.0.0
 
-* Upgraded to Apache Flink 2.1.1 (latest stable release with Java 21 support)
+* Upgraded to Apache Flink 2.0.1 (stable release with Java 21 support and published Kafka connector)
 * Upgraded to Java 21
 * Updated all dependencies:
-  - flink-connector-base: 2.1.1 (required for DeliveryGuarantee)
-  - Kafka connector: 4.0.1-2.0
+  - flink-connector-base: 2.0.1
+  - Kafka connector: 4.0.1-2.0 (fully compatible with Flink 2.0.1)
   - Kafka clients: 3.9.0
   - Jackson: 2.18.2
   - Log4j: 2.24.3
@@ -49,9 +49,10 @@
   - maven-compiler-plugin: 3.13.0
   - maven-surefire-plugin: 3.5.2
   - maven-shade-plugin: 3.6.0
-* Updated Flink installation scripts to download Flink 2.1.1
+* Updated Flink installation scripts to download Flink 2.0.1
 * API Changes for Flink 2.x compatibility:
   - Removed flink-java dependency (no longer exists in Flink 2.x)
   - Replaced Time API with java.time.Duration (Time.minutes(1) → Duration.ofMinutes(1))
   - Updated open() method signature to use OpenContext instead of Configuration
 * Updated all Java source files and documentation for Flink 2.x APIs
+* Note: Using Flink 2.0.1 instead of 2.1.x to ensure full compatibility with published Kafka connector 4.0.1-2.0
