@@ -29,3 +29,7 @@
 ## Version 2.0.1
 
 * Added additional tests to verify the serialization/deserialization of the models, including one for testing the use of the JsonIgnoreProperties annotation.
+
+## Version 2.1.0
+
+* Removed Gitpod from the project.
