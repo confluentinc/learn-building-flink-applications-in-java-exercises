@@ -12,12 +12,6 @@ This repository is for the **Building Flink Applications in Java** course provid
 - A Flink installation.
 - A Confluent Cloud account.
 
-## Gitpod
-
-A [Gitpod](https://gitpod.io/) configuration is available for these exercises. You can use this to construct a pre-configured environment suitable for working on the exercises:
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/confluentinc/learn-building-flink-applications-in-java-exercises)
-
 ## Repo Structure
 
 ### build.sh
@@ -34,7 +28,7 @@ This will stage and then solve each exercise before running the tests for that e
 
 ### install_flink.sh
 
-This script is used by the `.gitpod.yml` to install Flink. However, if you are setting up a local environment, you may want to refer to this script (or even execute it) to get your own Flink installation ready.
+If you are setting up a local environment, you may want to refer to this script (or even execute it) to get your own Flink installation ready.
 
 ### cheatsheet.md
 
