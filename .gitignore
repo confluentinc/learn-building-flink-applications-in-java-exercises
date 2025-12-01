@@ -23,6 +23,9 @@
 # Java
 target
 
+# Maven generated files
+dependency-reduced-pom.xml
+
 # Properties files (may contain user credentials)
 consumer.properties
 producer.properties
