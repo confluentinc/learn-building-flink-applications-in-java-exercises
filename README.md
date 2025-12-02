@@ -6,10 +6,10 @@ This repository is for the **Building Flink Applications in Java** course provid
 
 ## Requirements
 
-- Java 11 
-	- Flink does not currently support anything newer than Java 11. The code in the repo assumes that you are using Java 11.
+- Java 21
+	- Flink 2.0.1 requires a minimum of Java 11 and has support for Java 21. The code in this repo uses Java 21.
 - A Java development environment.
-- A Flink installation.
+- A Flink 2.0.1 installation.
 - A Confluent Cloud account.
 
 ## Repo Structure

@@ -17,9 +17,9 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
 
 import java.io.InputStream;
+import java.time.Duration;
 import java.util.Properties;
 
 public class UserStatisticsJob {
@@ -73,7 +73,7 @@ public class UserStatisticsJob {
         return flightDataSource
                 .map(UserStatistics::new)
                 .keyBy(UserStatistics::getEmailAddress)
-                .window(TumblingEventTimeWindows.of(Time.minutes(1)))
+                .window(TumblingEventTimeWindows.of(Duration.ofMinutes(1)))
                 .reduce(UserStatistics::merge);
     }
 }
