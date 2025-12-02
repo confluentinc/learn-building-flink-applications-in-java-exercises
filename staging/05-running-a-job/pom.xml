@@ -13,7 +13,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<flink.version>1.17.0</flink.version>
-		<kafka.version>3.2.2</kafka.version>
+		<kafka.version>3.7.1</kafka.version>
 		<jackson.version>2.14.0</jackson.version>
 		<target.java.version>11</target.java.version>
 		<scala.binary.version>2.12</scala.binary.version>
