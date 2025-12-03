@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import static org.apache.flink.types.PojoTestUtils.assertSerializedAsPojo;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
 class SunsetAirFlightDataTest {
 
     ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
@@ -93,10 +96,20 @@ class SunsetAirFlightDataTest {
 
     @Test
     public void serializer_shouldHandleUnknownFields() throws Exception {
-        String json = "{\"emailAddress\":\"LJNZGYPIER@email.com\",\"flightDepartureTime\":\"2023-10-16T22:25:00.000Z\",\"iataDepartureCode\":\"LAS\",\"flightArrivalTime\":\"2023-10-17T09:38:00.000Z\",\"iataArrivalCode\":\"BOS\",\"flightNumber\":\"SKY1522\",\"confirmation\":\"SKY1OUJUUK\",\"unknownField\":\"ignore\"}";
-
+        String json = "{\"customerEmailAddress\":\"LJNZGYPIER@email.com\",\"departureTime\":\"2023-10-16T22:25:00.000Z\",\"departureAirport\":\"LAS\",\"arrivalTime\":\"2023-10-17T09:38:00.000Z\",\"arrivalAirport\":\"BOS\",\"flightId\":\"SKY1522\",\"referenceNumber\":\"SKY1OUJUUK\",\"unknownField\":\"ignore\"}";
+        
         SunsetAirFlightData object = mapper.readValue(json, SunsetAirFlightData.class);
+ 
+        SunsetAirFlightData expected = new SunsetAirFlightData();
+        expected.setCustomerEmailAddress("LJNZGYPIER@email.com");
+        expected.setDepartureTime(ZonedDateTime.parse("2023-10-16T22:25:00.000Z").withZoneSameInstant(ZoneId.of("UTC")));
+        expected.setDepartureAirport("LAS");
+        expected.setArrivalTime(ZonedDateTime.parse("2023-10-17T09:38:00.000Z").withZoneSameInstant(ZoneId.of("UTC")));
+        expected.setArrivalAirport("BOS");
+        expected.setFlightId("SKY1522");
+        expected.setReferenceNumber("SKY1OUJUUK");
 
         assertInstanceOf(SunsetAirFlightData.class, object);
+        assertEquals(expected, object);
     }
 }
